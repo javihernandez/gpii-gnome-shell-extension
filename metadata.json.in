@@ -1,0 +1,8 @@
+{
+    "uuid": "@uuid@",
+    "name": "GPII shell extension",
+    "description": "A GNOME-Shell extension for the GPII personalization framework",
+    "shell-version": ["@shell_version@"],
+    "settings-schema": "@settings_schema@",
+    "url": "https://github.com/javihernandez/gpii-gnome-shell-extension"
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gpii-gnome-shell-extension">
+  <schema path="/net/gpii/gnome-shell--extension/"
+          id="net.gpii.gnome-shell-extension">
+    <!--
+    <key type="s" name="logo-file">
+      <default>'/usr/share/pixmaps/fedora_whitelogo.svg'</default>
+      <summary>Logo file</summary>
+      <description>The full logo file path</description>
+    </key>
+    <key type="d" name="logo-size">
+      <range min="5.0" max="15.0"/>
+      <default>9.0</default>
+      <summary>Logo size</summary>
+      <description>The logo size in percent relative to the screen width</description>
+    </key>
+    -->
+  </schema>
+</schemalist>
