@@ -20,5 +20,6 @@ AC_SUBST([SHELL_VERSION])
 
 AC_CONFIG_FILES([
   Makefile
+  icons/Makefile
 ])
 AC_OUTPUT

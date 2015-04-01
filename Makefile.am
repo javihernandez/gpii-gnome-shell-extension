@@ -1,11 +1,12 @@
+SUBDIRS = icons
 UUID := gpii-gnome-shell-extension@gpii.net
 SCHEMA := net.gpii.gnome-shell-extension
 NULL :=
 
 extensiondir = $(datadir)/gnome-shell/extensions/$(UUID)
 dist_extension_DATA =	\
-	README.md	\
-	extension.js	\
+	README.md    	\
+	extension.js 	\
 	$(NULL)
 nodist_extension_DATA = metadata.json
 
@@ -23,8 +24,8 @@ CLEANFILES = metadata.json
 gsettings_SCHEMAS = $(srcdir)/schemas/$(SCHEMA).gschema.xml
 @GSETTINGS_RULES@
 
-EXTRA_DIST +=	\
-	$(gsettings_SCHEMAS)		\
+EXTRA_DIST +=			\
+	$(gsettings_SCHEMAS)	\
 	$(NULL)
 
 CLEANFILES += schemas/gschemas.compiled
