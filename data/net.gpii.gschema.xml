@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema path="/net/gpii/" id="net.gpii">
+    <key type="b" name="gpii-enabled">
+      <default>false</default>
+      <summary>GPII enable/disable</summary>
+      <description>Whether the GPII is turned on.</description>
+    </key>
+  </schema>
+</schemalist>

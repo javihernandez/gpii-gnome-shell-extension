@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=GPII personalization framework
+Exec=gpii-launch
+NoDisplay=false
+Terminal=true
+AutostartCondition=GSettings net.gpii gpii-enabled
+X-GNOME-AutoRestart=false
+OnlyShowIn=GNOME;
