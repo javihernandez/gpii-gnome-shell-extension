@@ -12,6 +12,34 @@ const Me = imports.misc.extensionUtils.getCurrentExtension();
 const Lib = Me.imports.lib;
 const Util = imports.misc.util;
 
+const Tweener = imports.ui.tweener;
+
+let text, button;
+
+function _hideTweener() {
+    Main.uiGroup.remove_actor(text);
+    text = null;
+}
+
+function _showTweener(msg) {
+    if (!text) {
+        text = new St.Label({ style_class: "tweener-label", text: msg });
+        Main.uiGroup.add_actor(text);
+    }
+
+    text.opacity = 255;
+
+    let monitor = Main.layoutManager.primaryMonitor;
+
+    text.set_position(Math.floor(monitor.width / 2 - text.width / 2),
+    Math.floor(monitor.height / 2 - text.height / 2));
+
+    Tweener.addTween(text, { opacity: 0,
+                             time: 4,
+                             transition: 'easeInExpo',
+                             onComplete: _hideTweener });
+}
+
 // Custom implementation of PopupImageMenuItem to get rid of
 // https://bugzilla.gnome.org/show_bug.cgi?id=733540
 // TODO: Remove when fixed
@@ -269,20 +297,26 @@ GPIIExtension.prototype = {
         if (isError) {
             var res = JSON.parse(msg.response_body.data);
             if (res == null || res.isError) {
-                this.__loggedInUserToken = null;
-                this.logout.actor.hide();
-                this.loggedInLabel.label.set_text("No user has logged in yet");
-                this.loggedInLabel.actor.set_style("font-style: italic; min-width: 250px;");
-                this.loggedInLabel.setIcon("dialog-warning");
+                if (this.__loggedInUserToken != null) {
+                    _showTweener("User with token " +  this.__loggedInUserToken + " was successfully logged out");
+                    this.__loggedInUserToken = null;
+                    this.logout.actor.hide();
+                    this.loggedInLabel.label.set_text("No user has logged in yet");
+                    this.loggedInLabel.actor.set_style("font-style: italic; min-width: 250px;");
+                    this.loggedInLabel.setIcon("dialog-warning");
+                }
             }
         } else {
             var userToken = eval(msg.response_body.data);
-            this.__loggedInUserToken = userToken;
-            this.logout.actor.show();
-            if(Object.prototype.toString.call(userToken) === '[object Array]') {
-                this.loggedInLabel.label.set_text("Current user: " + userToken);
-                this.loggedInLabel.actor.set_style("font-style: normal; font-weight: bold; min-width: 250px;");
-                this.loggedInLabel.setIcon("avatar-default");
+            if (this.__loggedInUserToken == null) {
+                this.__loggedInUserToken = userToken;
+                _showTweener("User with token " +  this.__loggedInUserToken + " was successfully logged in");
+                this.logout.actor.show();
+                if(Object.prototype.toString.call(userToken) === '[object Array]') {
+                    this.loggedInLabel.label.set_text("Current user: " + userToken);
+                    this.loggedInLabel.actor.set_style("font-style: normal; font-weight: bold; min-width: 250px;");
+                    this.loggedInLabel.setIcon("avatar-default");
+                }
             }
         }
     },

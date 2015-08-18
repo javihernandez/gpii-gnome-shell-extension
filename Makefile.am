@@ -9,6 +9,7 @@ dist_extension_DATA =	\
 	extension.js 	\
         prefs.js	\
         lib.js		\
+        stylesheet.css	\
 	$(NULL)
 nodist_extension_DATA = metadata.json
 
