@@ -7,6 +7,8 @@ extensiondir = $(datadir)/gnome-shell/extensions/$(UUID)
 dist_extension_DATA =	\
 	README.md    	\
 	extension.js 	\
+        prefs.js	\
+        lib.js		\
 	$(NULL)
 nodist_extension_DATA = metadata.json
 
