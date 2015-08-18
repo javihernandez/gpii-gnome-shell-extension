@@ -256,16 +256,19 @@ GPIIExtension.prototype = {
     },
 
     _getUserTokenCb: function (session, msg, data) {
-        let isJSON;
+        // isError actually means either that there's no response or that the response is 
+        // a JSON object, which means that there aren't logged in users in the system.
+        //
+        let isError;
         if (msg.response_body.data != null) {
-            isJSON = msg.response_body.data.charAt(0) === "{" ? true: false;
+            isError = msg.response_body.data.charAt(0) === "{" ? true: false;
         } else {
-            isJSON = false;
+            isError = true;
         }
 
-        if (isJSON) {
+        if (isError) {
             var res = JSON.parse(msg.response_body.data);
-            if (res.isError) {
+            if (res == null || res.isError) {
                 this.__loggedInUserToken = null;
                 this.logout.actor.hide();
                 this.loggedInLabel.label.set_text("No user has logged in yet");
